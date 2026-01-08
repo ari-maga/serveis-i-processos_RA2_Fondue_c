@@ -11,14 +11,15 @@ public class GestorForquilles {
 		forquillesOcupades = 0;
 	}
 	
-	public synchronized void agafaForquilla(int numPer) {
-			try {
-				while(forquillesOcupades>=forquillesTotal)wait();
-				forquillesOcupades++;
-				notifyAll();
-			} catch (InterruptedException e) {
-				
-			}
+	public synchronized boolean agafaForquilla(int numPer) {
+			
+			if(forquillesOcupades>=forquillesTotal)return false;  // no facis cas wait();
+			forquillesOcupades++;
+			notifyAll();
+			/* catch (InterruptedException e) {
+				System.out.println("Hi ha hagut un error inesperat i s'ha interromput el thread de la persona "+numPer);
+			}*/
+			return true;
 	}
 	public synchronized void tornaForquilla(int numPer) {
 		forquillesOcupades--;

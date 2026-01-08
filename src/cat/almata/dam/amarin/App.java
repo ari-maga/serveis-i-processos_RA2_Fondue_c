@@ -1,6 +1,8 @@
 package cat.almata.dam.amarin;
 
 public class App {
+	
+	
 
 	public static void main(String[] args) {
 		/*
@@ -23,14 +25,14 @@ public class App {
 		 * c) Feu que en lloc d’esperar, si la fondue que vol triar està ocupada intenti utilitzar l’altra.
 		 * No oblideu adaptar els missatges.
 		 */
-		int numForquillesCarn = 4;
-		int numForquillesFormatge = 3;
+		int numForquillesCarn = 5;
+		int numForquillesFormatge = 5;
 		int numAmics = 12;
 		int tempsCarnPersona;
-		Persona[] persones = new Persona[numAmics];
-		Thread[] thPersones = new Thread[numAmics];
 		GestorForquilles gfFoundieCarn = new GestorForquilles(numForquillesCarn);
 		GestorForquilles gfFoundieFormatge = new GestorForquilles(numForquillesFormatge);
+		Persona[] persones = new Persona[numAmics];
+		Thread[] thPersones = new Thread[numAmics];
 		
 		
 		/* Aquí em dedico a crear les persones i els threads, he de crear numAmics persones i també a cada persona li assigno aleatoriament una foundie,
@@ -44,12 +46,12 @@ public class App {
 			if((int) Math.round( Math.random() * 1)==0) {
 				//va a la fondie de carn
 				System.out.println("Persona "+String.valueOf(i+1)+" va a la fondie de carn");
-				persones[i] = new Persona(tempsCarnPersona, gfFoundieCarn, i + 1,"carn");
+				persones[i] = new Persona(tempsCarnPersona, gfFoundieCarn,gfFoundieFormatge, i + 1,"carn");
 			}else {
 				// va a la fondie de formatge
 				System.out.println("Persona "+String.valueOf(i+1)+" va a la fondie de formatge");
 				//Assumeixo que el temps de fer el formatge són 2 segons que és sucar i treure
-				persones[i] = new Persona(tempsCarnPersona, gfFoundieFormatge, i + 1,"formatge");
+				persones[i] = new Persona(tempsCarnPersona, gfFoundieFormatge,gfFoundieCarn, i + 1,"formatge");
 			}
 			//Poso la persona a l'array de threads i l'inicio.
 			thPersones[i] = new Thread(persones[i]);
